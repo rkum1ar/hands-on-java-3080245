@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
+import bank.exceptions.AmountException;
+
 public class Menu {
   private Scanner scanner;
   
@@ -49,7 +51,7 @@ menu.scanner.close();
       System.out.println("1 : Deposit");
       System.out.println("2 : Withdrawal");
       System.out.println("3 : Check Balance");
-      System.out.println("1 : Exit");
+      System.out.println("4 : Exit");
       System.out.println("====================");
 
       selection=scanner.nextInt();
@@ -58,13 +60,21 @@ menu.scanner.close();
         case 1:
         System.out.println("How much would you like to deposite");
         amount = scanner.nextDouble();
-        account.deposit(amount);
+        try{account.deposit(amount);}
+        catch(AmountException e){
+          System.out.println(e.getMessage());
+          System.out.println("Please try again.");
+        }
         break;
 
         case 2:
         System.out.println("How much would you like withdraw ? ");
         amount = scanner.nextDouble();
-        account.withdraw(amount);
+        try{account.withdraw(amount);}
+        catch(AmountException e){
+          System.out.println(e.getMessage());
+          System.out.println("Please try again.");
+        }
         break;
 
         case 3:
